@@ -16,6 +16,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	hashedPwd, _ := utils.HashPassword(user.Password)
 
 	_, err := config.DB.Exec("INSERT INTO users (email, password) VALUES (?, ?)", user.Email, hashedPwd)
+
 	if err != nil {
 		http.Error(w, "User already exists", http.StatusConflict)
 		return
