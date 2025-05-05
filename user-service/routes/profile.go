@@ -10,6 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Get profile
 func GetProfile(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	email := vars["email"]
