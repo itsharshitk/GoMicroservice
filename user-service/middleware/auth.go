@@ -2,12 +2,13 @@ package middleware
 
 import (
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/golang-jwt/jwt"
 )
 
-var jwtKey = []byte("your-secret-key") // Same as in auth-service
+var jwtKey = []byte(os.Getenv("JWT_SECRET_KEY")) // Same as in auth-service
 
 func JWTMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
