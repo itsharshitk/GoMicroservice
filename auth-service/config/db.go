@@ -19,9 +19,8 @@ func ConnectDB() {
 	host := os.Getenv("DB_HOST")
 	port := os.Getenv("DB_PORT")
 	dbname := os.Getenv("DB_NAME")
-	println(username)
+
 	dsn := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname
-	println(dsn)
 	DB, err = sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal("Database connection error:", err)
