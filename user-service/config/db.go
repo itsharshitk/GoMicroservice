@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -12,7 +13,15 @@ var DB *sql.DB
 
 func ConnectDB() {
 	var err error
-	dsn := "root:@tcp(localhost:3306)/authdb"
+
+	username := os.Getenv("DB_USERNAME")
+	password := os.Getenv("DB_PASSWORD")
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	dbname := os.Getenv("DB_NAME")
+
+	dsn := username + ":" + password + "@tcp(" + host + ":" + port + ")/" + dbname
+
 	DB, err = sql.Open("mysql", dsn)
 	if err != nil {
 		log.Fatal("Database connection error:", err)
